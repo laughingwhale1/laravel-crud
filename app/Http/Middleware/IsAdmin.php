@@ -12,9 +12,9 @@ class IsAdmin
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check() && Auth::user()->is_admin) {
-            return redirect('/home');
+            return $next($request);
         }
 
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }
