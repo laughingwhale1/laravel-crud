@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
+use App\Jobs\SendNewCompanyNotification;
 use App\Models\Company;
 
 class CompanyController extends Controller
@@ -23,12 +24,15 @@ class CompanyController extends Controller
     {
         $logoPath = $request->file('logo')->store('logos', 'public');
 
-        Company::create([
+
+        $company = Company::create([
             'name' => $request->name,
             'email' => $request->email,
             'logo' => $logoPath,
             'website' => $request->website,
         ]);
+
+        SendNewCompanyNotification::dispatch($company); // notifying by email
 
         return redirect()->route('companies.index');
     }
