@@ -34,7 +34,7 @@
                 <td>{{ $employee->last_name }}</td>
                 <td>{{ $employee->email }}</td>
                 <td>{{ $employee->phone }}</td>
-                <td>{{ $employee->company?->name ?? 'No Company' }}</td>
+                <td>{{ $employee->company?->name ?? '---' }}</td>
                 <td>
                     <a href="{{ route('employees.edit', $employee) }}">Edit</a>
                     <form action="{{ route('employees.destroy', $employee) }}" method="POST" style="display:inline;">

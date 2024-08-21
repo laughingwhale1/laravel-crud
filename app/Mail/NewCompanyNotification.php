@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 
 class NewCompanyNotification extends Mailable
 {
-    use Dispatchable, Queueable, SerializesModels;
+    use Queueable, SerializesModels;
 
     public $company;
 
